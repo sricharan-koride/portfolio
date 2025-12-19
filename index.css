@@ -42,7 +42,7 @@
 
     --container-max-width: 1180px;
     --container-normal-width: 800px;
-    --container-medium-width: 700px; 
+    --container-medium-width: 700px;
     --container-small-width: 500px;
 
     --gutter-huge: 12rem;
@@ -55,7 +55,8 @@
 }
 
 html {
-    font-size: 62.5%; /* (16/10)*100 = 62.5% => 1rem = 10px */
+    font-size: 62.5%;
+    /* (16/10)*100 = 62.5% => 1rem = 10px */
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
@@ -75,7 +76,8 @@ body {
     background: var(--black) url('images/dark-space.avif') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
-    opacity: 0.9; /* Adjust opacity if needed */
+    opacity: 0.9;
+    /* Adjust opacity if needed */
 }
 
 
@@ -181,7 +183,7 @@ p {
 }
 
 @media(max-width: 900px) {
-    p { 
+    p {
         max-width: var(--container-small-width);
     }
 }
@@ -222,7 +224,7 @@ body:not(.user-is-tabbing) a:focus {
     padding: 1rem 4.2rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid  var(--pink);
+    border: 1px solid var(--pink);
     font-weight: 400;
 }
 
@@ -407,7 +409,7 @@ body:not(.user-is-tabbing) a:focus {
 /* --------------------------------------- */
 
 .header {
-    background: linear-gradient(rgba(0,0,0, .1), rgba(0,0,0, .4)), 
+    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .4)),
         url('./images/header.jpg');
     height: 100vh;
     background-size: cover;
@@ -440,44 +442,142 @@ body:not(.user-is-tabbing) a:focus {
 }
 
 /* --------------------------------------- */
-/* ----- Work ----- */
+/* ----- Project Index ----- */
+/* --------------------------------------- */
+
+.project-index {
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 2rem;
+}
+
+.project-index__label {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.project-index__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.project-index__item {
+    font-size: 1.4rem;
+    color: var(--white-1);
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.project-index__item:hover {
+    color: var(--white);
+    background: var(--pink);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------- */
+/* ----- Work Projects ----- */
 /* --------------------------------------- */
 
 .work__box {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Aligns text top since we have padding now */
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle glass background */
+    backdrop-filter: blur(10px);
+    /* Blurring background behind */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4rem;
+    /* More breathing room */
+    border-radius: 20px;
+    /* Modern rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* Depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work__box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 50, 88, 0.3);
+    /* Subtle pink glow on hover */
 }
 
 @media(max-width: 900px) {
     .work__box {
         align-items: initial;
         flex-direction: column-reverse;
+        padding: 2.5rem;
+        /* Less padding on mobile */
     }
 }
 
 .work__box:not(:last-child) {
-    margin-bottom: 25rem;
+    margin-bottom: 8rem;
+    /* Reduced from 25rem to bring related content closer together visually */
 }
 
 @media(max-width: 500px) {
     .work__box:not(:last-child) {
-        margin-bottom: 20rem;
+        margin-bottom: 6rem;
     }
 }
 
 .work__links {
     display: flex;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .work__text {
-    flex: 0 0 30%;
+    flex: 0 0 45%;
+    /* Increased width for text for better readability */
 }
 
+/* Modern Tech Pills Styling */
 .work__list {
-    /* list-style-type: square; */
-    list-style-position: inside;
+    list-style: none;
     margin-bottom: var(--gutter-normal);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.work__list li {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-family: 'Hk Grotesk', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.work__list li:hover {
+    background: rgba(255, 50, 88, 0.15);
+    /* Pink tint on hover */
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: translateY(-2px);
 }
 
 .work__code {
@@ -559,7 +659,7 @@ body:not(.user-is-tabbing) a:focus {
     .about__text {
         flex: 0 0 35%;
     }
-    
+
     .about__photo-container {
         flex: 1;
         margin: 0 var(--gutter-huge) 0 0;
@@ -612,5 +712,68 @@ body:not(.user-is-tabbing) a:focus {
 @media(max-width: 500px) {
     .footer {
         padding: var(--gutter-medium) 0;
-    } 
+    }
+}
+
+/* --------------------------------------- */
+/* ----- Collapsible Projects ----- */
+/* --------------------------------------- */
+
+.work__details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0;
+}
+
+.work__box.expanded .work__details {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 2rem;
+}
+
+.btn-expand {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--pink);
+    color: var(--pink);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-expand:hover {
+    background: var(--pink);
+    color: white;
+    /* var(--white) might be off-white */
+}
+
+.btn-expand i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.work__box.expanded .btn-expand i {
+    transform: rotate(180deg);
+}
+
+/* --------------------------------------- */
+/* ----- Scroll Animations ----- */
+/* --------------------------------------- */
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

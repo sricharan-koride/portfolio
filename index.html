@@ -27,37 +27,44 @@
     Sricharan Koride
   </title>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #0073b1; /* LinkedIn blue */
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .btn.github {
-            background-color: #333; /* GitHub black */
-        }
-        .btn.email {
-            background-color: #D44638; /* Gmail red */
-        }
-        .btn:hover {
-            opacity: 0.8;
-        }
-        .icon {
-            font-size: 18px;
-        }
-       
-    </style>
+  <style>
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #0073b1;
+      /* LinkedIn blue */
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .btn.github {
+      background-color: #333;
+      /* GitHub black */
+    }
+
+    .btn.email {
+      background-color: #D44638;
+      /* Gmail red */
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    .icon {
+      font-size: 18px;
+    }
+  </style>
   <meta name="description" content="Graduate Student at University of Southern California">
   <!-- Add some coding keywords below, Ex: (React, CSS etc) -->
-  <meta name="keywords" content="PHTML/CSS | Java | C | Python | SQL | JavaScript | Typescript | Groovy | Angular | AngularJS | Spring framework | Jenkins | WebLogic" />
+  <meta name="keywords"
+    content="C++, Systems Programming, DuckDB, Vector Search, Java, Spring Boot, RAG, Python, Machine Learning, SQL, OS Development, React, Distributed Systems" />
   <link rel="stylesheet" href="index.css" />
 </head>
 
@@ -79,7 +86,7 @@
           <li class="nav__item">
             <a href="#contact" class="nav__link">Contact</a>
           </li>
-          
+
         </ul>
       </nav>
     </div>
@@ -90,10 +97,11 @@
           <span>Sricharan Koride</span>
         </h1>
         <!-- Put a small paragraph about yourself -->
-        <p>👋 Hey there! Hey there! I'm Sricharan, a CS grad student at USC and a Computer Science undergrad from 
-          CVR College of Engineering. Before diving into my master's, I spent two years at Accolite Digital as a 
-          full-stack software engineer, building cool and scalable solutions. I love solving tricky problems, writing 
-          clean code, and making tech work smarter. If you're into great software and good conversations, let’s connect! 🚀</p>
+        <p>👋 Hey there! Hey there! I'm Sricharan, a CS grad student at USC and a Computer Science undergrad from
+          CVR College of Engineering. Before diving into my master's, I spent two years at Accolite Digital as a
+          full-stack software engineer, building cool and scalable solutions. I love solving tricky problems, writing
+          clean code, and making tech work smarter. If you're into great software and good conversations, let’s connect!
+          🚀</p>
         <a href="#contact" class="btn btn--pink">Get in touch</a>
       </div>
     </div>
@@ -106,14 +114,104 @@
     <section class="work" id="work">
       <div class="row">
         <h2>My Work</h2>
+
+        <!-- Project Index -->
+        <div class="project-index">
+          <span class="project-index__label">Jump to:</span>
+          <div class="project-index__links">
+            <a href="#project-duckdb" class="project-index__item">DuckDB Vector Search</a>
+            <a href="#project-smartdoc" class="project-index__item">SmartDoc Finder</a>
+            <a href="#project-weenix" class="project-index__item">Weenix OS</a>
+            <a href="#project-image-class" class="project-index__item">Image Classification</a>
+          </div>
+        </div>
         <div class="work__boxes">
-  
+
           <!-- Each div with the work__box class is a project. -->
-          <div class="work__box">
-              <div class="work__text">
-                <h3>SmartDoc Finder: A Self-Hosted RAG Search Engine</h3>
+
+          <div class="work__box" id="project-duckdb">
+            <div class="work__text">
+              <h3>DuckDB Vector Search Extension (IVF-PQ)</h3>
+              <p>
+                A high-performance C++ extension that brings native Approximate Nearest Neighbor (ANN) search to DuckDB.
+                It implements Inverted File Indexing with Product Quantization (IVF-PQ) to enable memory-efficient
+                similarity search on millions of embeddings directly within SQL queries.
+              </p>
+
+              <div class="work__details">
+                <h4 style="margin-bottom: 1rem;">Full Description</h4>
                 <p>
-                  A complete, privacy-first Retrieval-Augmented Generation (RAG) system built from the ground up to answer complex questions using a private collection of documents. The project is architected as a full-stack, event-driven microservices application, containerized with Docker Compose for seamless one-command startup. It features a sophisticated 3-stage pipeline that combines hybrid search (Apache Lucene + FAISS), a cross-encoder re-ranker for relevance, and a locally-hosted LLM (via Ollama) to generate accurate, verifiable answers while ensuring 100% data privacy.
+                  This project is a custom extension for DuckDB designed to handle the growing need for vector analytics
+                  in local databases. Unlike external vector databases, this extension runs inside the DuckDB process,
+                  allowing for zero-copy data access and seamless integration with existing SQL tables.
+                </p>
+                <p>
+                  I engineered the core indexing logic using IVF-PQ (Inverted File + Product Quantization), which
+                  clusters vectors into Voronoi cells and compresses them using subspace quantization. This reduces
+                  memory usage by up to 32x compared to raw vectors while maintaining high recall.
+                </p>
+                <p>
+                  A standout feature is the custom Query Optimizer. I implemented a rewrite rule that intercepts SQL
+                  queries with WHERE clauses (e.g., WHERE category = 'electronics') and pushes them down into the vector
+                  search scanner. This enables Hybrid Search—filtering candidates before performing expensive distance
+                  calculations—drastically improving performance for filtered queries.
+                </p>
+
+                <h4 style="margin-top: 15px; margin-bottom: 1rem;">Key Features</h4>
+                <ul class="work__list">
+                  <li>IVF-PQ Indexing: Implements K-Means clustering and Product Quantization for efficient storage and
+                    retrieval.</li>
+                  <li>Hybrid Search: Custom optimizer rules support predicate pushdown for metadata filtering.</li>
+                  <li>Native Storage: Persists index data and centroids as standard, inspectable DuckDB tables.</li>
+                  <li>Distance Metrics: Optimized L2 (Euclidean) distance calculations.</li>
+                </ul>
+
+                <h4 style="margin-top: 15px; margin-bottom: 1rem;">Technologies</h4>
+                <ul class="work__list">
+                  <li>C++</li>
+                  <li>DuckDB Extension API</li>
+                  <li>Python (for testing)</li>
+                  <li>SQL</li>
+                  <li>CMake</li>
+                  <li>VCPKG</li>
+                  <li>Systems Programming</li>
+                  <li>Vector Math (Linear Algebra)</li>
+                  <li>Query Optimization</li>
+                </ul>
+
+                <div class="work__links">
+                  <a href="https://github.com/sricharan-koride/csci543-duckdb-ivf" title="View Source Code"
+                    target="_blank">
+                    <img src="./images/github.svg" class="work__code" alt="GitHub">
+                  </a>
+                </div>
+              </div>
+
+              <button class="btn-expand" onclick="toggleProject(this)">
+                <span>Read More</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/duckdb_vector.png" class="work__image" alt="DuckDB Vector Search Extension" />
+            </div>
+          </div>
+
+          <div class="work__box" id="project-smartdoc">
+            <div class="work__text">
+              <h3>SmartDoc Finder: A Self-Hosted RAG Search Engine</h3>
+              <p>
+                A complete, privacy-first Retrieval-Augmented Generation (RAG) system built from the ground up to answer
+                complex questions using a private collection of documents.
+              </p>
+
+              <div class="work__details">
+                <p>
+                  The project is architected as a full-stack, event-driven microservices application, containerized with
+                  Docker Compose for seamless one-command startup. It features a sophisticated 3-stage pipeline that
+                  combines hybrid search (Apache Lucene + FAISS), a cross-encoder re-ranker for relevance, and a
+                  locally-hosted LLM (via Ollama) to generate accurate, verifiable answers while ensuring 100% data
+                  privacy.
                 </p>
                 <ul class="work__list">
                   <li>Java</li>
@@ -128,79 +226,119 @@
                   <li>FAISS</li>
                   <li>Ollama</li>
                 </ul>
-            
+
                 <div class="work__links">
-                  <a href="https://github.com/sricharan-koride/smartdoc-finder" title="View Source Code" target="_blank">
+                  <a href="https://github.com/sricharan-koride/smartdoc-finder" title="View Source Code"
+                    target="_blank">
                     <!-- Make sure this path to your GitHub icon is correct -->
                     <img src="./images/github.svg" class="work__code" alt="GitHub">
                   </a>
                   <!-- You can add a live demo link here if you deploy it -->
                   <!-- <a href="#" title="View Live Demo" target="_blank">
-                    <img src="./images/external-link.svg" class="work__code" alt="Live Demo">
-                  </a> -->
+                      <img src="./images/external-link.svg" class="work__code" alt="Live Demo">
+                    </a> -->
                 </div>
               </div>
-              <div class="work__image-box">
-                <!-- Make sure to replace this with a screenshot of your project -->
-                <img src="./images/smartdoc-finder-project.png" class="work__image" alt="SmartDoc Finder Project" />
-              </div>
+
+              <button class="btn-expand" onclick="toggleProject(this)">
+                <span>Read More</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+            </div>
+            <div class="work__image-box">
+              <!-- Make sure to replace this with a screenshot of your project -->
+              <img src="./images/smartdoc-finder-project.png" class="work__image" alt="SmartDoc Finder Project" />
+            </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" id="project-weenix">
             <div class="work__text">
               <h3>Weenix: A UNIX-Like Operating System</h3>
               <p>
-                Engineered the core kernel of a UNIX-like OS from scratch, implementing robust modules for process and thread management, scheduling, and thread-safe synchronization using mutexes. Developed a flexible virtual file system (VFS) with support for multiple underlying file systems, providing a unified and reliable interface for all file operations. Designed and built a virtual memory manager to handle user address spaces and system calls, enabling efficient and protected user process execution.
+                Engineered the core kernel of a UNIX-like OS from scratch, implementing robust modules for process and
+                thread management, scheduling, and thread-safe synchronization using mutexes.
               </p>
-              <ul class="work__list">
-                <li>C</li>
-                <li>Kernel Development</li>
-                <li>Operating Systems</li>
-              </ul>
-              <div class="work__links">
-                <p style="font-style: italic; font-size: 0.9em; color: #555; margin-top: 15px;">
-                  Source code is private due to academic policy but can be provided upon request.
+
+              <div class="work__details">
+                <p>
+                  Developed a flexible virtual file system (VFS) with support for multiple underlying file systems,
+                  providing a unified and reliable interface for all file operations. Designed and built a virtual
+                  memory manager to handle user address spaces and system calls, enabling efficient and protected user
+                  process execution.
                 </p>
-                <a href="https://github.com/sricharan-koride/weenix-os" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
-                </a>
+                <ul class="work__list">
+                  <li>C</li>
+                  <li>Kernel Development</li>
+                  <li>Operating Systems</li>
+                </ul>
+                <div class="work__links">
+                  <p style="font-style: italic; font-size: 0.9em; color: #555; margin-top: 15px;">
+                    Source code is private due to academic policy but can be provided upon request.
+                  </p>
+                  <a href="https://github.com/sricharan-koride/weenix-os" title="View Source Code" target="_blank">
+                    <img src="./images/github.svg" class="work__code" alt="GitHub">
+                  </a>
+                </div>
               </div>
+
+              <button class="btn-expand" onclick="toggleProject(this)">
+                <span>Read More</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
             </div>
             <div class="work__image-box">
-              <img src="./images/166855630-c7ea7240-ea4c-4cd6-b307-f20f31d441c2.png" class="work__image" alt="Weenix OS Project" />
+              <img src="./images/166855630-c7ea7240-ea4c-4cd6-b307-f20f31d441c2.png" class="work__image"
+                alt="Weenix OS Project" />
             </div>
           </div>
 
-          <div class="work__box">
+          <div class="work__box" id="project-image-class">
             <div class="work__text">
               <h3>Image Classification Using Transfer Learning</h3>
               <p>
-                This project builds an image classifier using transfer learning with pre-trained models like ResNet50, EfficientNetB0, and VGG16. It fine-tunes only the final layer while freezing earlier layers to extract meaningful features. Data augmentation (cropping, rotation, flipping) enhances generalization, and the model is trained with ReLU activation, batch normalization, dropout, and ADAM optimizer for at least 50 epochs with early stopping. The goal is to create a robust classifier optimized for small datasets using state-of-the-art deep learning techniques.
+                This project builds an image classifier using transfer learning with pre-trained models like ResNet50,
+                EfficientNetB0, and VGG16. It fine-tunes only the final layer while freezing earlier layers to extract
+                meaningful features.
               </p>
-              <ul class="work__list">
-                <li>Python</li>
-                <li>TensorFlow</li>
-                <li>Keras</li>
-                <li>PyTorch</li>
-                <li>OpenCV</li>
-                <li>NumPy</li>
-                <li>Pandas</li>
-                <li>Matplotlib</li>
-                <li>Scikit-learn</li>
-            </ul>
 
-              <div class="work__links">
-              
-                <a href="https://github.com/sricharan-koride/Image-classification-using-Transfer-Learning" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
-                </a>
+              <div class="work__details">
+                <p>
+                  Data augmentation (cropping, rotation, flipping) enhances generalization, and the model is trained
+                  with ReLU activation, batch normalization, dropout, and ADAM optimizer for at least 50 epochs with
+                  early stopping. The goal is to create a robust classifier optimized for small datasets using
+                  state-of-the-art deep learning techniques.
+                </p>
+                <ul class="work__list">
+                  <li>Python</li>
+                  <li>TensorFlow</li>
+                  <li>Keras</li>
+                  <li>PyTorch</li>
+                  <li>OpenCV</li>
+                  <li>NumPy</li>
+                  <li>Pandas</li>
+                  <li>Matplotlib</li>
+                  <li>Scikit-learn</li>
+                </ul>
+
+                <div class="work__links">
+
+                  <a href="https://github.com/sricharan-koride/Image-classification-using-Transfer-Learning"
+                    title="View Source Code" target="_blank">
+                    <img src="./images/github.svg" class="work__code" alt="GitHub">
+                  </a>
+                </div>
               </div>
+
+              <button class="btn-expand" onclick="toggleProject(this)">
+                <span>Read More</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
             </div>
             <div class="work__image-box">
               <img src="./images/imageclassification.png" class="work__image" alt="Project 1" />
             </div>
           </div>
-<!--           <div class="work__box">
+          <!--           <div class="work__box">
             <div class="work__text">
               <h3>CSC Grameen-E Works</h3>
               <p>
@@ -224,7 +362,7 @@
               <img src="./images/grameen.png" class="work__image" />
             </div>
           </div> -->
-<!--           <div class="work__box">
+          <!--           <div class="work__box">
             <div class="work__text">
             <h3>Speech Emotion Recognition with Librosa</h3>
             <p>
@@ -255,12 +393,12 @@
               <img src="./images/SER.png" class="work__image" />
             </div>
           </div> -->
-        
+
         </div>
 
 
- 
-        </div>
+
+      </div>
       </div>
     </section>
 
@@ -269,34 +407,35 @@
     <section class="work" id="papers">
       <div class="row">
         <h2>Academic Papers and Publications</h2>
-      
-          <div class="work__boxes">
-            
+
+        <div class="work__boxes">
+
           <div class="work__box">
             <div class="work__text">
-            <h3>A Study of Post-Quantum Cryptopgraphy in TLS Integration</h3>
-            <p>
-              As part of CSCI-520 Security Systems course at USC, I authored this survey paper that 
-              explores various efforts to integrate Post-Quantum Cryptopgraphic algorithms into TLS 1.3
-              to safeguard it from quantum cryptanalytic attacks. This was praised by Professor Clifford
-              Neuman, a director at ISI as "an extremely well written and well organized paper on what 
-              is often a very confusing topic.  Good job."
-            </p>
-            <div class="work__links">
-              <a href="https://drive.google.com/file/d/1ikWfSK_ERzVXzPSkI2SnOpMzZ2WFC_tL/view?usp=sharing" class="link__text" target="_blank">
-                View Paper <span>&rarr;</span>
-              </a>
-              <a href="https://github.com/sricharan-koride/CSCI-530-Research-Paper-" target="_blank">
-                <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-              </a>
-            </div>
+              <h3>A Study of Post-Quantum Cryptopgraphy in TLS Integration</h3>
+              <p>
+                As part of CSCI-520 Security Systems course at USC, I authored this survey paper that
+                explores various efforts to integrate Post-Quantum Cryptopgraphic algorithms into TLS 1.3
+                to safeguard it from quantum cryptanalytic attacks. This was praised by Professor Clifford
+                Neuman, a director at ISI as "an extremely well written and well organized paper on what
+                is often a very confusing topic. Good job."
+              </p>
+              <div class="work__links">
+                <a href="https://drive.google.com/file/d/1ikWfSK_ERzVXzPSkI2SnOpMzZ2WFC_tL/view?usp=sharing"
+                  class="link__text" target="_blank">
+                  View Paper <span>&rarr;</span>
+                </a>
+                <a href="https://github.com/sricharan-koride/CSCI-530-Research-Paper-" target="_blank">
+                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
+                </a>
+              </div>
             </div>
             <div class="work__image-box">
               <img src="./images/Practical-Advice-for-PQC-Migration-for-TLS-1.3.png" class="work__image" />
             </div>
           </div>
 
-<!--           <div class="work__box">
+          <!--           <div class="work__box">
             <div class="work__text">
             <h3>Color Identification System for Visually Impaired People</h3>
             <p>
@@ -328,12 +467,12 @@
               <img src="./images/coloridentification.png" class="work__image" />
             </div>
           </div> -->
-          </div>
-          
-          
-          
-          
-          
+        </div>
+
+
+
+
+
       </div>
     </section>
 
@@ -346,16 +485,17 @@
           <div class="about__text">
             <!-- Replace the below paragraph with info about yourself -->
             <p>
-              Hey there! I'm Sricharan, a full-stack developer who thrives on problem-solving, writing clean code, 
-              and making tech work smarter—not harder. A self-starter by nature, I love diving deep into complex 
-              challenges. Beyond code, you’ll find me sketching, clicking random artifacts on the streets and 
-              skies, roaming ancient temples, decoding geopolitical dramas, stargazing, or debating historical events. 
+              Hey there! I'm Sricharan, a full-stack developer who thrives on problem-solving, writing clean code,
+              and making tech work smarter—not harder. A self-starter by nature, I love diving deep into complex
+              challenges. Beyond code, you’ll find me sketching, clicking random artifacts on the streets and
+              skies, roaming ancient temples, decoding geopolitical dramas, stargazing, or debating historical events.
               I have a keen interest in comparative linguistics and Indian law—because why stop at debugging software
-              when you can debug history and legal systems too? If you're looking for someone who can solve problems, 
+              when you can debug history and legal systems too? If you're looking for someone who can solve problems,
               build great software, and throw in a well-timed history fact, we should definitely connect
             </p>
             <!-- Provide a link to your resume -->
-            <a href="https://docs.google.com/document/d/1is4r2OQ5-vml3FCeSz1ItXrWhRcEvh3j/edit?usp=sharing&ouid=106498382748385656894&rtpof=true&sd=true" class="btn" target="_blank">My Resume</a>
+            <a href="https://docs.google.com/document/d/1is4r2OQ5-vml3FCeSz1ItXrWhRcEvh3j/edit?usp=sharing&ouid=106498382748385656894&rtpof=true&sd=true"
+              class="btn" target="_blank">My Resume</a>
           </div>
 
           <div class="about__photo-container">
@@ -367,7 +507,7 @@
       </div>
     </section>
 
-    
+
   </main>
 
   <!-- ***** Contact ***** -->
@@ -382,7 +522,7 @@
         </p>
         <!-- Replace the email with yours -->
         <a href="mailto:koride@usc.edu" class="btn email">
-            <i class="fas fa-envelope icon"></i> koride@usc.edu
+          <i class="fas fa-envelope icon"></i> koride@usc.edu
         </a>
       </div>
     </div>
@@ -394,16 +534,17 @@
     <div class="row">
       <!-- Update the links to point to your accounts -->
       <ul class="footer__social-links">
-        
+
         <li class="footer__social-link-item">
           <a target="_blank" href="https://github.com/sricharan-koride/" title="Link to Github Profile">
             <img src="./images/github.svg" class="footer__social-image" alt="Github">
           </a>
         </li>
-       
+
         <li class="footer__social-link-item">
           <a target="_blank" href="https://www.linkedin.com/in/sricharan-koride/">
-            <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image" alt="Linkedin">
+            <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image"
+              alt="Linkedin">
           </a>
         </li>
       </ul>
@@ -422,7 +563,7 @@
   </footer>
 
   <a href="#top" class="back-to-top" title="Back to Top">
-    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
+    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image" />
   </a>
   <script src="./index.js"></script>
 </body>
